@@ -102,7 +102,7 @@ public class ProductController {
 	@RequestMapping("/updateProduct.do")
 	public ModelAndView updateProduct(@ModelAttribute("product")Product product
 		/*@RequestParam("prodNo") int prodNo*/) throws Exception {
-
+		product.setManuDate(product.getManuDate().replaceAll("-", ""));
 		System.out.println("/updateProduct.do");
 		// Business Logic
 		productService.updateProduct(product);
