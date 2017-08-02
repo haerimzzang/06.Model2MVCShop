@@ -109,7 +109,8 @@ public class ProductController {
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/getProduct.do");
-		//modelAndView.addObject("product", product);
+		 modelAndView.addObject("product", product);
+
 		System.out.println(modelAndView.getViewName());
 		System.out.println("/updateProduct.do 끝");
 		return modelAndView;
@@ -120,12 +121,15 @@ public class ProductController {
 			HttpServletRequest request) throws Exception {
 
 		System.out.println("/listProduct.do");
-
+	
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
-
+		
+		System.out.println("커런트페이지"+search.getCurrentPage());
+		System.out.println("설치컨디션"+search.getSearchCondition());
+		System.out.println("설치키워드"+search.getSearchKeyword());
 		// Business logic 수행
 		Map<String, Object> map = productService.getProductList(search);
 

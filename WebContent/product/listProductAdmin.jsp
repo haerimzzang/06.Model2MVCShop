@@ -298,7 +298,7 @@ function fncGetUserList(currentPage){
 		
 		%>
     		 --%>
-    		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
+    		   <input type="hidden" id="currentPage" name="currentPage" value="1"/>
     		<jsp:include page="../common/pageNavigator.jsp"/>	
     	</td>
 	</tr>

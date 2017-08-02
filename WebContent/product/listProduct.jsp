@@ -96,7 +96,7 @@ function fncGetUserList(currentPage){
 		
 			</select>
 			<input type="text" name="searchKeyword" 
-						value="${! empty search.searchKeyword ? search.searchKeyword : ""}"  
+						value="${! empty search.searchKeyword ? search.searchKeyword : ""   }"  
 						class="ct_input_g" style="width:200px; height:20px" > 
 		</td>
 		
@@ -296,7 +296,7 @@ function fncGetUserList(currentPage){
 		
 		%>
     		 --%>
-    		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
+    		   <input type="hidden" id="currentPage" name="currentPage" value="1"/>
     		 <jsp:include page="../common/pageNavigator.jsp"/>	
     	</td>
 	</tr>

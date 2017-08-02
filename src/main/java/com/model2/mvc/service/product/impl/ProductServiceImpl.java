@@ -46,6 +46,12 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		List<Product> list = productDao.getProductList(search);
 		int totalCount = productDao.getTotalCount(search);
+		System.out.println("ししししししししししししししししし");
+		System.out.println("ししししししししししししししししし");
+		System.out.println(totalCount);
+		System.out.println(list.toString());
+		System.out.println("ししししししししししししししししし");
+		System.out.println("ししししししししししししししししし");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
