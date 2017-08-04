@@ -77,12 +77,13 @@ function fncGetUserList(currentPage){
 		<td></td>
 		<td align="left">
 		<c:if test="${purchase.tranCode.trim() == '1'}">구매완료</c:if>
-		<c:if test="${purchase.tranCode.trim() == '2'}">배송중</c:if>
+		
+		<c:if test="${purchase.tranCode.trim() == '2'}"> 배송중 </c:if>
+		<c:if test="${purchase.tranCode.trim() == '2'}"><a href="/updateTranCodeByProd.do?prodNo=${purchase.purchaseProd.prodNo}&tranCode=${purchase.tranCode.trim()}&menu=purchase">(물건도착)</a></c:if>
 		<c:if test="${purchase.tranCode.trim() == '3'}">배송완료</c:if>
 		</td>
 		<td></td>
-		<td align="left">
-		<c:if test="${purchase.tranCode.trim() == '2'}"><a href="/updateTranCodeByProd.do?prodNo=${purchase.purchaseProd.prodNo}&tranCode=${purchase.tranCode.trim()}&menu=purchase">물건도착</a></c:if>
+		<td align="left"><c:if test="${purchase.tranCode.trim() == '1'}"><a href="/updateProductView.do?prodNo=${purchase.purchaseProd.prodNo}&tranCode=${purchase.tranCode.trim()}" >수정하기</a></c:if>
 		</td>
 	</tr>
 	<tr>

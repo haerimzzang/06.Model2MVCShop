@@ -2,3 +2,7 @@
 /config/
 /log4j.properties
 /sql/
+/Search.class
+/TestHasABinding.class
+/UserHasASearch.class
+/UserHasASearch.jsp

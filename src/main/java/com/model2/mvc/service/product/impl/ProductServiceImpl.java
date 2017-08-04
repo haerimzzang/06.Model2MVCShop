@@ -44,6 +44,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Map<String, Object> getProductList(Search search) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("食奄 辞帖溌昔 "  + search);
 		List<Product> list = productDao.getProductList(search);
 		int totalCount = productDao.getTotalCount(search);
 		System.out.println("ししししししししししししししししし");
