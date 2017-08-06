@@ -1,23 +1,29 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-	
-<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
-		◀ 이전
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<c:if test="${resultPage.beginUnitPage > resultPage.pageUnit}">
+<%-- 	<a
+		href="/listUser.do?currentPage=${ resultPage.beginUnitPage-1 }&searchCondition=${ search.searchCondition}&searchKeyword=${ search.searchKeyword}&menu=search">
+		</a> --%>
+		
+		<a href="javascript:fncGetUserList('${ resultPage.beginUnitPage-1 }');">◀ pre</a>
+
 </c:if>
-<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
-		<a href="javascript:fncGetUserList('${ resultPage.currentPage-1}')">◀ 이전</a>
-</c:if>
 
-<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
+<c:forEach var="i" begin="${resultPage.beginUnitPage}"
+	end="${resultPage.endUnitPage}">
+	<%-- <a href="/listUser.do?currentPage=${ i }&searchCondition=${ search.searchCondition}&menu=search">${ i }</a> --%>
+
 	<a href="javascript:fncGetUserList('${ i }');">${ i }</a>
 </c:forEach>
+<c:if test="${resultPage.endUnitPage < resultPage.maxPage }">
+	<%-- <a href="/listUser.do?currentPage=${ resultPage.endUnitPage+1}&searchCondition=${ search.searchCondition}&searchKeyword=${ search.searchKeyword}&menu=search">  next ▶</a> --%>
+	<a href="javascript:fncGetUserList('${resultPage.endUnitPage+1}')">
+		next ▶</a>
+</c:if>
 
-<c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">
-		이후 ▶
-</c:if>
-<c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
-		<a href="javascript:fncGetUserList('${resultPage.endUnitPage+1}')">이후 ▶</a>
-</c:if>

@@ -49,11 +49,11 @@ function fncGetUserList(currentPage){
 		<td class="ct_line02"></td>
 		<td class="ct_list_b" width="150">받는 사람 </td>
 		<td class="ct_line02"></td>
-		<td class="ct_list_b">전화번호</td>
+		<td class="ct_list_b" width="150">전화번호</td>
 		<td class="ct_line02"></td>
-		<td class="ct_list_b">배송현황</td>
+		<td class="ct_list_b"width="150">배송현황</td>
 		<td class="ct_line02"></td>
-		<td class="ct_list_b">정보수정</td>
+		<td class="ct_list_b"width="150">정보수정</td>
 	</tr>
 	
 	<c:set var="i" value="0"/>
@@ -77,13 +77,12 @@ function fncGetUserList(currentPage){
 		<td></td>
 		<td align="left">
 		<c:if test="${purchase.tranCode.trim() == '1'}">구매완료</c:if>
-		
 		<c:if test="${purchase.tranCode.trim() == '2'}"> 배송중 </c:if>
 		<c:if test="${purchase.tranCode.trim() == '2'}"><a href="/updateTranCodeByProd.do?prodNo=${purchase.purchaseProd.prodNo}&tranCode=${purchase.tranCode.trim()}&menu=purchase">(물건도착)</a></c:if>
 		<c:if test="${purchase.tranCode.trim() == '3'}">배송완료</c:if>
 		</td>
 		<td></td>
-		<td align="left"><c:if test="${purchase.tranCode.trim() == '1'}"><a href="/updateProductView.do?prodNo=${purchase.purchaseProd.prodNo}&tranCode=${purchase.tranCode.trim()}" >수정하기</a></c:if>
+		<td align="left"><c:if test="${purchase.tranCode.trim() == '1'}"><a href="/updatePurchaseView.do?prodNo=${purchase.purchaseProd.prodNo}&tranNo=${purchase.tranNo}" >수정하기</a></c:if>
 		</td>
 	</tr>
 	<tr>

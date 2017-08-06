@@ -23,7 +23,7 @@
 
 	<sql id="select-purchase">
 		SELECT 
-		prod_no, buyer_id, payment_option, receiver_name, receiver_phone, demailaddr, dlvy_request, dlvy_date, order_date, tran_status_code, tran_no
+		prod_no, buyer_id, payment_option, receiver_name, receiver_phone, demailaddr, dlvy_request, dlvy_date, order_data, tran_status_code, tran_no
 		FROM transaction
 	</sql>
 
@@ -46,21 +46,25 @@
 	</insert>
 
 	<select id="getPurchase" parameterType="string" resultMap="purchaseSelectMap">
-		<include refid="select-purchase" />
-		WHERE tran_no = #{tranNo}
+		SELECT t.prod_no, t.buyer_id, t.payment_option, t.receiver_name, t.receiver_phone, t.demailaddr, t.dlvy_request, t.dlvy_date, t.order_data, t.tran_status_code, t.tran_no, p.prod_name
+		FROM transaction t, product p
+		WHERE t.tran_no = #{tranNo}
+		AND p.prod_no = t.prod_no
 	</select>
 	
-	<update id="updateTranCode" parameterType="product" >
+	<update id="updateTranCode" parameterType="purchase" >
 	UPDATE transaction  
 	<set>
-	<if test="proTranCode == '1  '">
+
+	<if test="tranCode == 1">
 	tran_status_code = '2'
 	</if>
-	<if test="proTranCode == '2  '">
+	<if test="tranCode == 2">
 	tran_status_code = '3'
 	</if>
+
 	</set>
-	WHERE prod_no = #{prodNo:INTEGER}
+	WHERE prod_no = #{purchaseProd.prodNo:INTEGER}
 	</update>
 	
 	

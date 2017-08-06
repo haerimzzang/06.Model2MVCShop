@@ -1,5 +1,6 @@
 package com.model2.mvc.web.purchase;
 
+import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -85,6 +86,24 @@ public class PurchaseController {
 
 		return "forward:/purchase/addPurchase.jsp";
 	}
+	
+	@RequestMapping("/getPurchase.do")
+	public String getPurchase (@RequestParam("tranNo")int tranNo, Model model) throws Exception{
+		
+		System.out.println("/getPurchase.do");
+		
+		System.out.println(tranNo +"<====tranNo");
+
+		Purchase purchase =purchaseService.getPurchase(tranNo);
+		purchase.setDivyDate(purchase.getDivyDate().split(" ")[0]);
+		//purchase.setDivyDate(purchase.getDivyAddr().substring(0, 8));
+		System.out.println(purchase.getOrderDate()+"ddddddd");
+		model.addAttribute("purchase", purchase);
+		
+		return "forward:/purchase/getPurchase.jsp";
+	}
+	
+	
 	@RequestMapping("/listPurchase.do")
 	public String listPurchaes(@ModelAttribute("search") Search search, 
 			@ModelAttribute("user") User user, 
@@ -122,15 +141,72 @@ public class PurchaseController {
 		return "forward:/purchase/listPurchase.jsp";
 	}
 	
-	
-	
-	
-	
-	/*@RequestMapping("/updateProductView.do")
-	public String updateProductView(){
+	@RequestMapping("/updatePurchaseView.do")
+	public String updatePurchaseView(@ModelAttribute("purchase") Purchase purchase, Model model) throws Exception{
 		
+		System.out.println("/updatePurchaseView.do");
+				
+		purchase = purchaseService.getPurchase(purchase.getTranNo());
+		
+	
+		System.out.println(purchase +":::::::: purchase");
+		
+		model.addAttribute("purchase", purchase);
+		
+		return "forward:/purchase/updatePurchase.jsp";
 	}
 	
+	
+	@RequestMapping("/updatePurchase.do")
+	public String updatePurchase(@ModelAttribute("purchase") Purchase purchase ,@RequestParam("prodNo") int prodNo, 	@ModelAttribute("user") User user, 
+			Model model , HttpSession session) throws Exception{
+		
+		System.out.println("/updatePurchase.do");
+		String buyerId = ((User)session.getAttribute("user")).getUserId();
+		System.out.println("prodNo =====>> " + prodNo);
+		System.out.println(buyerId);
+		System.out.println();
+		purchase.setBuyer(userService.getUser(buyerId));
+		purchase.setPurchaseProd(productService.getProduct(prodNo));
+		//purchase.setPurchaseProd(productService.getProduct(prodNo));
+		System.out.println(purchase +"purchase");
+		
+		purchaseService.updatePurcahse(purchase);
+		
+		
+		
+		
+		
+		return "redirect:/getPurchase.do?tranNo="+purchase.getTranNo();
+	}
+	
+	@RequestMapping("updateTranCodeByProd.do")
+	public String updateTranCodeByProd(@ModelAttribute("purchase") Purchase purchase, @ModelAttribute("product") Product product, @RequestParam("prodNo") int prodNo, @RequestParam("tranCode") String tranCode, @RequestParam("menu") String menu, Model model, HttpServletRequest request)throws Exception{
+		System.out.println("updateTranCodeByProd.do start");
+		
+		System.out.println(prodNo +"++" +tranCode + "|||" +menu );
+		product.setProdNo(prodNo);
+//		product.setProTranCode(tranCode);
+		purchase.setTranCode(tranCode);
+		purchase.setPurchaseProd(product);
+		
+		purchaseService.updateTranCode(purchase);
+//		purchase.setTranCode(tranCode);
+//		purchase.setPurchaseProd(product);
+		
+		//purchaseService.updateTranCode(purchase);
+		
+		
+		System.out.println("어디까지");
+		if(menu.equals("manage")){
+			return "forward:/listProduct.do?menu=manage";
+		}else{
+			return "forward:/listPurchase.do";
+		}
+ 
+	}
+	
+	/*
 	@RequestMapping("/getProduct.do")
 	public ModelAndView getProduct(	@RequestParam("prodNo") int prodNo) throws Exception {
 
